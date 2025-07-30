@@ -23,27 +23,19 @@ const Chat = () => {
   return (
     <View style={{ flex: 1 }}>
       
-      <TextInput
+      <TextInput 
         placeholder="Ask Meta AI or Search"
         style={styles.searchInput}
       />
 
-     
-<ScrollView
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      style={{ marginHorizontal: 10 }}
-      contentContainerStyle={{ paddingRight: 10 }}
-    >
-      <View style={styles.buttonRow}>
-        <Button onPressIn={()=>alert("this is all button")} style={styles.button}>All</Button>
-        <Button onPressIn={()=>alert("this is unread button")} style={styles.button}>Unread</Button>
-        <Button onPressIn={()=>alert("this is Favroutes button")} style={styles.button}>Favroutes</Button>
-        <Button onPressIn={()=>alert("this is Group button")} style={styles.button}>Group</Button>
-        <Button onPressIn={()=>alert("this is add button")} style={styles.button}>+</Button>
-       
+     <View style={{display:"flex",flexDirection:"row",gap:5,margin:10,borderColor:"#999", }}>
+      <Button onPress={()=>alert("this is all button")} style={styles.button}><Text style={styles.buttonText}>All</Text></Button>
+      <Button onPress={()=>alert("this is unread button")} style={styles.button}><Text style={styles.buttonText}>Unread</Text></Button>
+      <Button onPress={()=>alert("this is Favroutes button")} style={styles.button}><Text style={styles.buttonText}>Favroutes</Text></Button>
+      <Button onPress={()=>alert("this is Group button")} style={styles.button}><Text style={styles.buttonText}>Group</Text></Button>
+      <Button onPress={()=>alert("this is add button")} style={styles.button}><Text style={styles.buttonText}>+</Text></Button>
       </View>
-    </ScrollView>
+
 
 
       <FlatList
@@ -58,6 +50,9 @@ const Chat = () => {
                 {item.lastMessage}
               </Text>
             </View>
+            <Text style={styles.time} numberOfLines={1}>
+                {item.time}
+              </Text>
           </TouchableOpacity>
         )}
       />
@@ -75,16 +70,13 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
   },
-  buttonRow: {
-    flexDirection: "row",
-    gap: 5,
-    margin: 10,
-    borderColor:"#999",
-  },button:{
+ button:{
     borderColor: "#999",
     borderWidth:1,
     backgroundColor:"transparent",
-    color:"black",
+  },
+  buttonText:{
+    color:"#25D366",
   },
 
   chatItem: {
@@ -114,6 +106,10 @@ const styles = StyleSheet.create({
   message: {
     color: "#555",
     marginTop: 2,
+    fontSize: 14,
+  },
+  time: {
+    color: "#555",
     fontSize: 14,
   },
 });

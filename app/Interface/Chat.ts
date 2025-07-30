@@ -1,5 +1,6 @@
 export interface chatInterface{
     name:string,
-    lastMessage : String,
+    lastMessage : string,
     profile : string,
+    time : string
 }
