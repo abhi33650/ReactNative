@@ -10,8 +10,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Button } from "@react-navigation/elements";
-import { chatInterface } from "../Interface/Chat";
-import { chatData } from "../DummyData/chatData";
+import { chatInterface } from "./Interface/Chat";
+import { chatData } from "./DummyData/chatData";
 
 const Chat = () => {
   const [showData, setShowData] = useState<chatInterface[]>([]);
