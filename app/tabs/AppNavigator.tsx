@@ -23,7 +23,7 @@ const AppNavigator = () => {
           tabBarIcon: ({ color, size }) => {
             let iconName: keyof typeof Ionicons.glyphMap;
 
-            if (route.name === 'Chats') iconName = 'chatbubble-outline';
+            if (route.name === 'Chats') iconName = 'chatbubble-ellipses-outline';
             else if (route.name === 'Updates') iconName = 'people-outline';
             else if (route.name === 'Call') iconName = 'call-outline';
             else iconName = 'help-outline'; // Fallback icon to ensure iconName is always assigned

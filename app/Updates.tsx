@@ -1,10 +1,10 @@
 import React = require("react")
-import { View } from "react-native"
+import { View , Text} from "react-native"
 
 const Profile = ()=>{
   return(
     <View>
-        <h1>This is profile tab</h1>
+        <Text>This is profile tab</Text>
     </View>
   )
 }

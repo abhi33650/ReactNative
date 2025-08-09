@@ -1,10 +1,10 @@
 import React = require("react")
-import { View } from "react-native"
+import { View , Text} from "react-native"
 
 const Call = ()=>{
   return(
     <View>
-        <h1>this is Call page</h1>
+        <Text>this is Call page</Text>
     </View>
   )
 }

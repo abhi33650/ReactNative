@@ -7,37 +7,38 @@ import {
   Image,
   Text,
   FlatList,
+  Button,
   TouchableOpacity,
 } from "react-native";
-import { Button } from "@react-navigation/elements";
+
 import { chatInterface } from "./Interface/Chat";
 import { chatData } from "./DummyData/chatData";
-
 const Chat = () => {
   const [showData, setShowData] = useState<chatInterface[]>([]);
-
+  const [isActive , setActive] = useState<string>("");
+  const buttons: string[] = ["All", "Unread", "Favrotes", "Group", "+"]
   useEffect(() => {
     setShowData(chatData);
   }, []);
-
+ console.log(isActive , " active data ");
+ 
   return (
     <View style={{ flex: 1 }}>
-      
-      <TextInput 
+      <TextInput
         placeholder="Ask Meta AI or Search"
         style={styles.searchInput}
       />
-
-     <View style={{display:"flex",flexDirection:"row",gap:5,margin:10,borderColor:"#999", }}>
-      <Button onPress={()=>alert("this is all button")} style={styles.button}><Text style={styles.buttonText}>All</Text></Button>
-      <Button onPress={()=>alert("this is unread button")} style={styles.button}><Text style={styles.buttonText}>Unread</Text></Button>
-      <Button onPress={()=>alert("this is Favroutes button")} style={styles.button}><Text style={styles.buttonText}>Favroutes</Text></Button>
-      <Button onPress={()=>alert("this is Group button")} style={styles.button}><Text style={styles.buttonText}>Group</Text></Button>
-      <Button onPress={()=>alert("this is add button")} style={styles.button}><Text style={styles.buttonText}>+</Text></Button>
+      <View style={styles.row}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {buttons.map((button) => {
+            return (
+              <TouchableOpacity style={[styles.button , isActive ===button && {backgroundColor:"#5FF28A"}]}  onPress={()=> setActive(button)}>
+                <Text style={styles.buttonText}>{button}</Text>
+              </TouchableOpacity>
+            )
+          })}
+        </ScrollView>
       </View>
-
-
-
       <FlatList
         data={showData}
         keyExtractor={(item, index) => index.toString()}
@@ -51,8 +52,8 @@ const Chat = () => {
               </Text>
             </View>
             <Text style={styles.time} numberOfLines={1}>
-                {item.time}
-              </Text>
+              {item.time}
+            </Text>
           </TouchableOpacity>
         )}
       />
@@ -66,19 +67,29 @@ const styles = StyleSheet.create({
   searchInput: {
     margin: 10,
     backgroundColor: "#eee",
-    borderColor: "#ccc",
+    borderColor: "blue",
     padding: 10,
     borderRadius: 10,
   },
- button:{
+  row: {
+    flexDirection: "row",
+    margin: 10,
+  },
+  button: {
     borderColor: "#999",
-    borderWidth:1,
-    backgroundColor:"transparent",
+    borderWidth: 1,
+    paddingVertical: 5,
+    paddingHorizontal: 20,
+    padding: 5,
+    borderRadius: 20,
+    backgroundColor: "transparent",
+    alignItems: "center",
+    marginRight: 5,
   },
-  buttonText:{
-    color:"#25D366",
+  buttonText: {
+    color: "#666",
+    fontWeight: "bold"
   },
-
   chatItem: {
     flexDirection: "row",
     alignItems: "center",
