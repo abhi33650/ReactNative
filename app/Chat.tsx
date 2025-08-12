@@ -7,43 +7,56 @@ import {
   Image,
   Text,
   FlatList,
-  Button,
   TouchableOpacity,
 } from "react-native";
-
-import { chatInterface } from "./Interface/Chat";
+import { ChatStackParamList, chatInterface } from "./Interface/Chat";
 import { chatData } from "./DummyData/chatData";
+import { useNavigation } from "@react-navigation/native"; // ✅ from react-navigation, not expo-router
+import { NativeStackNavigationProp } from "@react-navigation/native-stack"; // ✅ import type
+
+type ChatListNavProp = NativeStackNavigationProp<ChatStackParamList, "ChatList">;
+
 const Chat = () => {
   const [showData, setShowData] = useState<chatInterface[]>([]);
-  const [isActive , setActive] = useState<string>("");
-  const buttons: string[] = ["All", "Unread", "Favrotes", "Group", "+"]
+  const [isActive, setActive] = useState<string>("");
+
+  const buttons: string[] = ["All", "Unread", "Favrotes", "Group", "+"];
+
   useEffect(() => {
     setShowData(chatData);
   }, []);
- console.log(isActive , " active data ");
- 
+
+  const navigation = useNavigation<ChatListNavProp>();
+
   return (
     <View style={{ flex: 1 }}>
-      <TextInput
-        placeholder="Ask Meta AI or Search"
-        style={styles.searchInput}
-      />
+      <TextInput placeholder="Ask Meta AI or Search" style={styles.searchInput} />
+
       <View style={styles.row}>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {buttons.map((button) => {
-            return (
-              <TouchableOpacity style={[styles.button , isActive ===button && {backgroundColor:"#5FF28A"}]}  onPress={()=> setActive(button)}>
-                <Text style={styles.buttonText}>{button}</Text>
-              </TouchableOpacity>
-            )
-          })}
+          {buttons.map((button) => (
+            <TouchableOpacity
+              key={button}
+              style={[
+                styles.button,
+                isActive === button && { backgroundColor: "#5FF28A" },
+              ]}
+              onPress={() => setActive(button)}
+            >
+              <Text style={styles.buttonText}>{button}</Text>
+            </TouchableOpacity>
+          ))}
         </ScrollView>
       </View>
+
       <FlatList
         data={showData}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.chatItem}>
+          <TouchableOpacity
+            style={styles.chatItem}
+            onPress={() => navigation.navigate("ShowChat", { person: item })} // ✅ works now
+          >
             <Image source={{ uri: item.profile }} style={styles.avatar} />
             <View style={styles.chatInfo}>
               <Text style={styles.name}>{item.name}</Text>
@@ -62,6 +75,7 @@ const Chat = () => {
 };
 
 export default Chat;
+
 
 const styles = StyleSheet.create({
   searchInput: {

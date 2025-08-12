@@ -2,10 +2,9 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
-import Chat from '../Chat';
 import Updates from '../Updates';
 import Call from '../Call';
+import ChatStackNavigator from './ChatStackNavigator'; // ✅ stack with Chat + ShowChat
 
 const Tab = createBottomTabNavigator();
 
@@ -26,7 +25,7 @@ const AppNavigator = () => {
             if (route.name === 'Chats') iconName = 'chatbubble-ellipses-outline';
             else if (route.name === 'Updates') iconName = 'people-outline';
             else if (route.name === 'Call') iconName = 'call-outline';
-            else iconName = 'help-outline'; // Fallback icon to ensure iconName is always assigned
+            else iconName = 'help-outline';
 
             return <Ionicons name={iconName} size={size} color={color} />;
           },
@@ -67,7 +66,8 @@ const AppNavigator = () => {
         };
       }}
     >
-      <Tab.Screen name="Chats" component={Chat} />
+      {/* ✅ Use stack navigator for Chats tab */}
+      <Tab.Screen name="Chats" component={ChatStackNavigator} options={{ headerShown: false }} />
       <Tab.Screen name="Updates" component={Updates} />
       <Tab.Screen name="Call" component={Call} />
     </Tab.Navigator>

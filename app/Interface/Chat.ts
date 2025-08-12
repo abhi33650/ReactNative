@@ -4,3 +4,7 @@ export interface chatInterface{
     profile : string,
     time : string
 }
+export type ChatStackParamList = {
+    ChatList: undefined; 
+    ShowChat: { person: chatInterface }; 
+  };
