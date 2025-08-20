@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Updates from '../Updates';
 import Call from '../Call';
-import ChatStackNavigator from './ChatStackNavigator'; // ✅ stack with Chat + ShowChat
+import ChatStackNavigator from './ChatStackNavigator'; 
 
 const Tab = createBottomTabNavigator();
 

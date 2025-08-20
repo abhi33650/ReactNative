@@ -13,7 +13,6 @@ import { ChatStackParamList, chatInterface } from "./Interface/Chat";
 import { chatData } from "./DummyData/chatData";
 import { useNavigation } from "@react-navigation/native"; // ✅ from react-navigation, not expo-router
 import { NativeStackNavigationProp } from "@react-navigation/native-stack"; // ✅ import type
-
 type ChatListNavProp = NativeStackNavigationProp<ChatStackParamList, "ChatList">;
 
 const Chat = () => {
